@@ -16,13 +16,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Entity batch creation with template
 - Entity relationship creation
 - Entity relationship removal
-- C++11 bindings
+
+## [1.1.0] - 2024-03-14
+
+### Added
+
+- C++17 bindings
 
 ### Fixed
 
-### Changed
-
-### Removed
+- Type creation did not contain the first component
+- Iterator crashed when no table satisfied the query
 
 ## [1.0.0] - 2024-03-14
 

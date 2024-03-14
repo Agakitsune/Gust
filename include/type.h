@@ -24,6 +24,7 @@ int compare_type(const type_t *a, const type_t *b);
 uint64_t index_type(const type_t *type, entity_t component);
 void free_type(type_t *type);
 void display_type(const type_t *type);
+uint64_t shift_type(const world_t *world, const type_t *type, uint64_t id);
 
 #ifdef __cplusplus
 }

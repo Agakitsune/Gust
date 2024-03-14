@@ -10,6 +10,7 @@ int new_type(type_t *type, entity_t component) {
     if (type->ids == NULL) {
         return -1;
     }
+    type->ids[0] = component;
     type->count = 1;
     return 0;
 }
@@ -126,4 +127,15 @@ void display_type(const type_t *type) {
         printf("%lu ", type->ids[i]);
     }
     printf("\n");
+}
+
+uint64_t shift_type(const world_t *world, const type_t *type, uint64_t id) {
+    uint64_t shift = 0;
+    for (uint64_t i = 0; i < type->count; i++) {
+        if (type->ids[i] == id) {
+            return shift;
+        }
+        shift += gust_get_component_size(world, type->ids[i]);
+    }
+    return -1;
 }

@@ -16,7 +16,12 @@ file(GLOB_RECURSE SOURCE
     ${PROJECT_SOURCE_DIR}/src/*.s
 )
 
+file(GLOB_RECURSE SOURCECPP
+    ${PROJECT_SOURCE_DIR}/src/*.cpp
+)
+
 add_library(${PROJECT_NAME} SHARED ${SOURCE})
+add_library(${PROJECT_NAME}++ SHARED ${SOURCECPP})
 
 target_include_directories(${PROJECT_NAME}
     PUBLIC
@@ -38,6 +43,12 @@ endif()
 
 target_link_libraries(${PROJECT_NAME}
     PUBLIC
+        ${SANITIZE_LIBS}
+)
+
+target_link_libraries(${PROJECT_NAME}++
+    PUBLIC
+        ${PROJECT_NAME}
         ${SANITIZE_LIBS}
 )
 
@@ -64,9 +75,19 @@ if (NOT ${CMAKE_BUILD_TYPE} OR ${CMAKE_BUILD_TYPE} STREQUAL "Debug")
         main.c
     )
 
+    add_executable(${PROJECT_NAME}_demo++
+        main.cpp
+    )
+
     target_link_libraries(${PROJECT_NAME}_demo
         PUBLIC
             ${PROJECT_NAME}
+            ${SANITIZE_LIBS}
+    )
+
+    target_link_libraries(${PROJECT_NAME}_demo++
+        PUBLIC
+            ${PROJECT_NAME}++
             ${SANITIZE_LIBS}
     )
 
@@ -80,10 +101,38 @@ if (NOT ${CMAKE_BUILD_TYPE} OR ${CMAKE_BUILD_TYPE} STREQUAL "Debug")
                 -Wpedantic
                 ${SANITIZE_FLAGS}
         )
+
+        target_compile_options(${PROJECT_NAME}_demo++
+            PUBLIC
+                -ggdb
+                -g3
+                -Wall
+                -Wextra
+                -Wpedantic
+                ${SANITIZE_FLAGS}
+        )
     endif()
 else()
     if (LINUX AND NOT APPLE)
         target_compile_options(${PROJECT_NAME}
+            PUBLIC
+                -Wall
+                -Wextra
+                -Wpedantic
+                -Werror
+                -Wno-unused-parameter
+                -Wno-unused-variable
+                -Wno-unused-but-set-variable
+                -Wno-unused-function
+                -Wno-unused-result
+                -Wno-unused-value
+                -Wno-unused-label
+                -Wno-unused-local-typedefs
+                -Wno-unused-macros
+                -Wno-unused-const-variable
+        )
+
+        target_compile_options(${PROJECT_NAME}++
             PUBLIC
                 -Wall
                 -Wextra

@@ -8,6 +8,10 @@
 
 #include "world.h"
 #include "entity.h"
+#include "iter.h"
+#include "table.h"
+#include "component.h"
+#include "system.h"
 
 // #include "allocator.h"
 #include "allocator/pool.h"
