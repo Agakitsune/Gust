@@ -1,4 +1,7 @@
 
+#include <string.h>
+#include <stdlib.h>
+
 #include "component.h"
 #include "world.h"
 

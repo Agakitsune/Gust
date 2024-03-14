@@ -4,6 +4,7 @@
 #include <string.h>
 #include <stdio.h>
 
+#include "asm.h"
 #include "hash/table/probe.h"
 
 int hash_table_uint64_linear_init(hash_table_uint64_linear_t *table, uint64_t initial_capacity) {
@@ -48,7 +49,7 @@ uint64_t hash_table_uint64_linear_find_index(const hash_table_uint64_linear_t *t
 
 int hash_table_uint64_linear_insert(hash_table_uint64_linear_t *table, uint64_t key, uint64_t value) {
     uint64_t index = hash_table_uint64_linear_find_index(table, key);
-    if (index == -1) {
+    if (index == (uint64_t)-1) {
         return -1;
     }
     table->entries[index].key = key;
@@ -78,16 +79,16 @@ int hash_table_uint64_linear_insert(hash_table_uint64_linear_t *table, uint64_t 
 
 uint64_t hash_table_uint64_linear_lookup(const hash_table_uint64_linear_t *table, uint64_t key) {
     uint64_t index = hash_table_uint64_linear_find_index(table, key);
-    if (index == -1) {
-        return NULL;
+    if (index == (uint64_t)-1) {
+        return 0;
     }
     return table->entries[index].value;
 }
 
 uint64_t hash_table_uint64_linear_remove(hash_table_uint64_linear_t *table, uint64_t key) {
     uint64_t index = hash_table_uint64_linear_find_index(table, key);
-    if (index == -1) {
-        return NULL;
+    if (index == (uint64_t)-1) {
+        return 0;
     }
     uint64_t value = table->entries[index].value;
     table->entries[index].value = 0;

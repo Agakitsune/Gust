@@ -17,6 +17,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Entity relationship creation
 - Entity relationship removal
 
+## [1.1.1] - 2024-03-14
+
+### Fixed
+
+- Cmake didn't use the right flags for Release mode
+- Fixed all warnings
+- Fixed Cmake to use C++17
+
 ## [1.1.0] - 2024-03-14
 
 ### Added

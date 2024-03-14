@@ -12,7 +12,7 @@ extern "C" {
 #include "query.h"
 #include "table.h"
 
-typedef struct world_t world_t;
+// typedef struct world_t world_t;
 
 typedef struct gust_iter_t {
     query_t query;

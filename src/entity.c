@@ -3,6 +3,7 @@
 
 #include "entity.h"
 #include "world.h"
+#include "record.h"
 
 entity_t new_entity(world_t *world) {
     if (cvector_size(&world->free_entity) > 0) {

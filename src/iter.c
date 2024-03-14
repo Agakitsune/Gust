@@ -1,6 +1,9 @@
 
+#include <stdlib.h>
+
 #include "iter.h"
 #include "world.h"
+#include "component.h"
 
 entity_t gust_new_iter(world_t *world, query_t *query) {
     entity_t iter = world->last_iter++;

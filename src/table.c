@@ -4,6 +4,7 @@
 
 #include "table.h"
 #include "world.h"
+#include "component.h"
 
 table_t *gust_add_table(world_t *world, type_t *type, uint64_t block_size) {
     // table_t **tables = cvector_data(&world->tables);
@@ -77,7 +78,7 @@ int gust_add_to_table(table_t *table, void *data) {
 
 void *gust_get_data_from_table_w_id(const world_t *world, const table_t *table, uint64_t row, uint64_t id) {
     uint64_t shift = shift_type(world, &table->type, id);
-    if (shift == -1) {
+    if (shift == (uint64_t)-1) {
         return NULL;
     }
     return gust_get_data_from_table_w_shift(table, row, shift);

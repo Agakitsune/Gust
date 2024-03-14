@@ -8,7 +8,7 @@
 void pool_populate(pool_t *pool, char *data) {
     pool->free = data;
     char *p = data;
-    for (int i = 0; i < pool->pool_size; i += pool->type_size) {
+    for (uint64_t i = 0; i < pool->pool_size; i += pool->type_size) {
         *(char **)p = p + pool->type_size;
         p += pool->type_size;
     }
