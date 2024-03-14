@@ -8,7 +8,7 @@ extern "C" {
 
 #include "type.h"
 
-typedef struct world_t world_t;
+// typedef struct world_t world_t;
 
 typedef struct table_t {
     type_t type; // What types of data are in the table

@@ -4,7 +4,7 @@ project(gust)
 enable_language(C ASM)
 
 set(CMAKE_C_STANDARD 99)
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
@@ -52,9 +52,46 @@ target_link_libraries(${PROJECT_NAME}++
         ${SANITIZE_LIBS}
 )
 
-if (NOT ${CMAKE_BUILD_TYPE} OR ${CMAKE_BUILD_TYPE} STREQUAL "Debug")
+message(STATUS "Building in ${CMAKE_BUILD_TYPE}")
+if (${CMAKE_BUILD_TYPE} STREQUAL "Release")
+    if (LINUX AND NOT APPLE)
+    target_compile_options(${PROJECT_NAME}
+        PUBLIC
+            -Wall
+            -Wextra
+            -Wpedantic
+            -Werror
+            -Wno-unused-parameter
+            -Wno-unused-variable
+            -Wno-unused-but-set-variable
+            -Wno-unused-function
+            -Wno-unused-result
+            -Wno-unused-value
+            -Wno-unused-label
+            -Wno-unused-local-typedefs
+            -Wno-unused-macros
+            -Wno-unused-const-variable
+    )
 
-    message(STATUS "Building in debug mode")
+    target_compile_options(${PROJECT_NAME}++
+        PUBLIC
+            -Wall
+            -Wextra
+            -Wpedantic
+            -Werror
+            -Wno-unused-parameter
+            -Wno-unused-variable
+            -Wno-unused-but-set-variable
+            -Wno-unused-function
+            -Wno-unused-result
+            -Wno-unused-value
+            -Wno-unused-label
+            -Wno-unused-local-typedefs
+            -Wno-unused-macros
+            -Wno-unused-const-variable
+    )
+    endif()
+else()
     message(STATUS "Sanitize: ${SANITIZE}")
     message(STATUS "Sanitize flags: ${SANITIZE_FLAGS}")
     message(STATUS "Sanitize libs: ${SANITIZE_LIBS}")
@@ -110,44 +147,6 @@ if (NOT ${CMAKE_BUILD_TYPE} OR ${CMAKE_BUILD_TYPE} STREQUAL "Debug")
                 -Wextra
                 -Wpedantic
                 ${SANITIZE_FLAGS}
-        )
-    endif()
-else()
-    if (LINUX AND NOT APPLE)
-        target_compile_options(${PROJECT_NAME}
-            PUBLIC
-                -Wall
-                -Wextra
-                -Wpedantic
-                -Werror
-                -Wno-unused-parameter
-                -Wno-unused-variable
-                -Wno-unused-but-set-variable
-                -Wno-unused-function
-                -Wno-unused-result
-                -Wno-unused-value
-                -Wno-unused-label
-                -Wno-unused-local-typedefs
-                -Wno-unused-macros
-                -Wno-unused-const-variable
-        )
-
-        target_compile_options(${PROJECT_NAME}++
-            PUBLIC
-                -Wall
-                -Wextra
-                -Wpedantic
-                -Werror
-                -Wno-unused-parameter
-                -Wno-unused-variable
-                -Wno-unused-but-set-variable
-                -Wno-unused-function
-                -Wno-unused-result
-                -Wno-unused-value
-                -Wno-unused-label
-                -Wno-unused-local-typedefs
-                -Wno-unused-macros
-                -Wno-unused-const-variable
         )
     endif()
 endif()

@@ -5,6 +5,7 @@
 
 #include "system.h"
 #include "world.h"
+#include "component.h"
 
 int gust_generate_query(world_t *world, query_t *query, const char *str) {
     size_t len = 0;
@@ -12,7 +13,7 @@ int gust_generate_query(world_t *world, query_t *query, const char *str) {
     while (1) {
         len = strcspn(str, " ,");
         id = gust_get_component_id_w_n(world, str, len);
-        if (id == -1) {
+        if (id == (uint64_t)-1) {
             return -1;
         }
         if (add_query(query, id) == -1) {
@@ -32,7 +33,7 @@ entity_t gust_declare_system(world_t *world, void (*system)(gust_iter_t*), const
     if (gust_generate_query(world, &q, query) == -1) {
         return 0;
     }
-    if (gust_new_iter(world, &q) == -1) {
+    if (gust_new_iter(world, &q) == (uint64_t)-1) {
         free_query(&q);
         return 0;
     }
@@ -40,7 +41,7 @@ entity_t gust_declare_system(world_t *world, void (*system)(gust_iter_t*), const
 }
 
 entity_t gust_declare_system_w_query(world_t *world, void (*system)(gust_iter_t*), query_t *query) {
-    if (gust_new_iter(world, query) == -1) {
+    if (gust_new_iter(world, query) == (uint64_t)-1) {
         free_query(&query);
         return 0;
     }

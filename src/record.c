@@ -1,4 +1,6 @@
 
+#include <stdlib.h>
+
 #include "record.h"
 #include "world.h"
 

@@ -4,6 +4,7 @@
 #include <stdio.h>
 
 #include "type.h"
+#include "component.h"
 
 int new_type(type_t *type, entity_t component) {
     type->ids = malloc(sizeof(entity_t));
@@ -61,7 +62,7 @@ int add_type(type_t *type, entity_t component) {
     if (ids == NULL) {
         return -1;
     }
-    if (insert == -1) {
+    if (insert == (uint64_t)-1) {
         ids[type->count] = component;
     } else {
         for (uint64_t i = type->count; i > insert; i--) {

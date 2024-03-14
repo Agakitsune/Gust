@@ -1,6 +1,7 @@
 
 #include <stddef.h>
 #include <stdlib.h>
+#include <stdio.h>
 
 #include "query.h"
 

@@ -18,7 +18,7 @@ typedef struct cvector_t {
 
 cvector_t *cvector_init(const classic_t *allocator, cvector_t *vector, uint64_t base_count);
 
-void cvector_free(cvector_t *vector);
+void cvector_free(const cvector_t *vector);
 
 int cvector_add(const classic_t *allocator, cvector_t *vector, void *data);
 int cvector_add_range(const classic_t *allocator, cvector_t *vector, void *data, uint64_t count);

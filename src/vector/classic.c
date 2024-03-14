@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "asm.h"
 #include "vector/classic.h"
 
 cvector_t *cvector_init(
@@ -22,7 +23,7 @@ cvector_t *cvector_init(
     return vector;
 }
 
-void cvector_free(cvector_t *vector) {
+void cvector_free(const cvector_t *vector) {
     free(vector->data);
 }
 

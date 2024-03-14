@@ -11,7 +11,7 @@ extern "C" {
 #include "utils.h"
 #include "iter.h"
 
-typedef struct world_t world_t;
+// typedef struct world_t world_t;
 
 typedef struct system_t {
     void (*system)(gust_iter_t*);

@@ -85,6 +85,7 @@ namespace gust {
                 return false;
             }
         }
+        return true;
     }
 
     uint64_t Query::shift(const World &world, Entity until) const {
