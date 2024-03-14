@@ -108,45 +108,51 @@ else()
         )
     endif()
 
-    add_executable(${PROJECT_NAME}_demo
-        main.c
-    )
-
-    add_executable(${PROJECT_NAME}_demo++
-        main.cpp
-    )
-
-    target_link_libraries(${PROJECT_NAME}_demo
-        PUBLIC
-            ${PROJECT_NAME}
-            ${SANITIZE_LIBS}
-    )
-
-    target_link_libraries(${PROJECT_NAME}_demo++
-        PUBLIC
-            ${PROJECT_NAME}++
-            ${SANITIZE_LIBS}
-    )
-
-    if (LINUX AND NOT APPLE)
-        target_compile_options(${PROJECT_NAME}_demo
-            PUBLIC
-                -ggdb
-                -g3
-                -Wall
-                -Wextra
-                -Wpedantic
-                ${SANITIZE_FLAGS}
+    if (EXISTS ${CMAKE_SOURCE_DIR}/main.c)
+        add_executable(${PROJECT_NAME}_demo
+            main.c
         )
 
-        target_compile_options(${PROJECT_NAME}_demo++
+        target_link_libraries(${PROJECT_NAME}_demo
             PUBLIC
-                -ggdb
-                -g3
-                -Wall
-                -Wextra
-                -Wpedantic
-                ${SANITIZE_FLAGS}
+                ${PROJECT_NAME}
+                ${SANITIZE_LIBS}
         )
+
+        if (LINUX AND NOT APPLE)
+            target_compile_options(${PROJECT_NAME}_demo
+                PUBLIC
+                    -ggdb
+                    -g3
+                    -Wall
+                    -Wextra
+                    -Wpedantic
+                    ${SANITIZE_FLAGS}
+            )
+        endif()
+    endif()
+
+    if (EXISTS ${CMAKE_SOURCE_DIR}/main.cpp)
+        add_executable(${PROJECT_NAME}_demo++
+            main.cpp
+        )
+
+        target_link_libraries(${PROJECT_NAME}_demo++
+            PUBLIC
+                ${PROJECT_NAME}++
+                ${SANITIZE_LIBS}
+        )
+
+        if (LINUX AND NOT APPLE)
+            target_compile_options(${PROJECT_NAME}_demo++
+                PUBLIC
+                    -ggdb
+                    -g3
+                    -Wall
+                    -Wextra
+                    -Wpedantic
+                    ${SANITIZE_FLAGS}
+            )
+        endif()
     endif()
 endif()
